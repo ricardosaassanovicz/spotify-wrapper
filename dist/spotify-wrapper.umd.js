@@ -86,7 +86,20 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var API_URL = exports.API_URL = 'https://api.spotify.com/v1';
+var TOKEN_API = 'BQBwnYuoOnxMblT6NpdeSFIaTSltqWsKqSH4HIkQGugPkU1k7d828xRGbBtXJJ3CiMzjfiA8H739LNHhIpL0z_526e8eovRSsjliv0Pt_dfW9riemGbjs-62WskxP_XAgCXyRLMNjwmf14dP0ckDGnvc_g';
+
+var API_URL = 'https://api.spotify.com/v1';
+
+var HEADERS = {
+  headers: {
+    Accept: 'application/json',
+    Authorization: 'Bearer ' + TOKEN_API
+  }
+};
+
+exports.TOKEN_API = TOKEN_API;
+exports.API_URL = API_URL;
+exports.HEADERS = HEADERS;
 
 /***/ }),
 /* 1 */
@@ -98,9 +111,10 @@ var API_URL = exports.API_URL = 'https://api.spotify.com/v1';
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var toJSON = exports.toJSON = function toJSON(data) {
+var toJSON = function toJSON(data) {
   return data.json();
 };
+exports.default = toJSON;
 
 /***/ }),
 /* 2 */
@@ -114,42 +128,32 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getAlbumTracks = exports.getAlbums = exports.getAlbum = undefined;
 
+var _utils = __webpack_require__(1);
+
+var _utils2 = _interopRequireDefault(_utils);
+
 var _config = __webpack_require__(0);
 
-var _utils = __webpack_require__(1);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* global fetch */
 
-var token = 'BQBwnYuoOnxMblT6NpdeSFIaTSltqWsKqSH4HIkQGugPkU1k7d828xRGbBtXJJ3CiMzjfiA8H739LNHhIpL0z_526e8eovRSsjliv0Pt_dfW9riemGbjs-62WskxP_XAgCXyRLMNjwmf14dP0ckDGnvc_g';
-
 var getAlbum = exports.getAlbum = function getAlbum(id) {
   return fetch(_config.API_URL + '/albums/' + id, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      Authorization: 'Bearer ' + token
-    }
-  }).then(_utils.toJSON);
+    method: 'GET', HEADERS: _config.HEADERS
+  }).then(_utils2.default);
 };
 
 var getAlbums = exports.getAlbums = function getAlbums(ids) {
   return fetch(_config.API_URL + '/albums?ids=' + ids, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      Authorization: 'Bearer ' + token
-    }
-  }).then(_utils.toJSON);
+    method: 'GET', HEADERS: _config.HEADERS
+  }).then(_utils2.default);
 };
 
 var getAlbumTracks = exports.getAlbumTracks = function getAlbumTracks(id) {
   return fetch(_config.API_URL + '/albums/' + id + '/track', {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      Authorization: 'Bearer ' + token
-    }
-  }).then(_utils.toJSON);
+    method: 'GET', HEADERS: _config.HEADERS
+  }).then(_utils2.default);
 };
 
 /***/ }),
@@ -164,22 +168,20 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.searchPlaylists = exports.searchTracks = exports.searchArtists = exports.searchAlbums = exports.search = undefined;
 
+var _utils = __webpack_require__(1);
+
+var _utils2 = _interopRequireDefault(_utils);
+
 var _config = __webpack_require__(0);
 
-var _utils = __webpack_require__(1);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* global fetch */
 
-var token = 'BQBwnYuoOnxMblT6NpdeSFIaTSltqWsKqSH4HIkQGugPkU1k7d828xRGbBtXJJ3CiMzjfiA8H739LNHhIpL0z_526e8eovRSsjliv0Pt_dfW9riemGbjs-62WskxP_XAgCXyRLMNjwmf14dP0ckDGnvc_g';
-
 var search = exports.search = function search(query, type) {
   return fetch(_config.API_URL + '/search?q=' + query + '&type=' + type, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      Authorization: 'Bearer ' + token
-    }
-  }).then(_utils.toJSON);
+    method: 'GET', HEADERS: _config.HEADERS
+  }).then(_utils2.default);
 };
 
 var searchAlbums = exports.searchAlbums = function searchAlbums(query) {
