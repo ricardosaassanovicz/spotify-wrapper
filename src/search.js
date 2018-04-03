@@ -1,7 +1,9 @@
-import { API_URL } from '../src/config';
-import { toJSON } from '../src/utils';
+/* global fetch */
 
-const token = 'BQD8JyQaNnhT5xA2LJRUtyENxTqtfzRiSoCTdAgDYNB_M6PPXCyE1A_XfTjyK1lAQvtz1frZVbBSkegsmqC82QR6jugsvWiGvSYRWPoZRpcCYd4eGFm99st7KYI-mHEhMhv9DWWtp7-PLUFZe-Pb1Pe4fw';
+import { API_URL } from './config';
+import { toJSON } from './utils';
+
+const token = 'BQBwnYuoOnxMblT6NpdeSFIaTSltqWsKqSH4HIkQGugPkU1k7d828xRGbBtXJJ3CiMzjfiA8H739LNHhIpL0z_526e8eovRSsjliv0Pt_dfW9riemGbjs-62WskxP_XAgCXyRLMNjwmf14dP0ckDGnvc_g';
 
 export const search = (query, type) => 
   fetch(`${API_URL}/search?q=${query}&type=${type}`, {

@@ -4,13 +4,13 @@ import {
   searchArtists,
   searchPlaylists,
   searchTracks,
-} from '../src/search';
+} from './search';
 
 import {
   getAlbum,
   getAlbums,
   getAlbumTracks,
-} from '../src/album';
+} from './album';
 
 module.exports = {
   search,
