@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/ricardosaassanovicz/spotify-wrapper.svg?branch=master)](https://travis-ci.org/ricardosaassanovicz/spotify-wrapper)
 
+[![Coverage Status](https://coveralls.io/repos/github/ricardosaassanovicz/spotify-wrapper/badge.svg)](https://coveralls.io/github/ricardosaassanovicz/spotify-wrapper)
+
 A wrapper to work with the [Spotify Web API](https://developer.spotify.com/web-api/).
 
 ## Dependencies
