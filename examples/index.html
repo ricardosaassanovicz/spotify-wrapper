@@ -6,18 +6,27 @@
 </head>
 <body>
 
+    <div id="albums"></div>
+
 <script src="../dist/spotify-wrapper.umd.js"></script>
 <script>
 
-    // const albums = spotifyWrapper.searchAlbums('Incubus');
+    const spotify = new SpotifyWrapper({
+        token: 'BQBSv-pHVPLUq2SpY1Zmy39ms8SbgWtA5zqSegtO_H8kcfYY6gz1z4op4EGhaxKvhEgp7XC4SZRmlSCCjxG8i3Ui76Pyi__k7elj97V27Fs97_-TBuZxh3SisFnGf5LF3TRQAX1XYqa9Dl62lw6i0tAm_A',
+    });
 
-    // albums.then( data => {
-    //     markup = data.albums.items.map(item => 
-    //       `<img> src='${item.images[0].url}' alt='${item.name}'/>`
-    //     ).join('');
+    const albumsDOM = document.getElementById('albums');
+    const albums = spotify.search.albums('Metallica');
 
-    // });
+    albums.then( data => {
+        markup = data.albums.items.map(item => 
+          `<img src='${item.images[0].url}' alt='${item.name}'/>`
+        ).join(' ');
 
+        albumsDOM.innerHTML = markup;
+
+    });
+    
 </script>
 
 </body>

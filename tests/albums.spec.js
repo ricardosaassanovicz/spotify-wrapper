@@ -2,18 +2,21 @@ import chai , { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import sinonStubPromise from 'sinon-stub-promise';
-import { getAlbum, getAlbums, getAlbumTracks } from '../src/album';
+import SpotifyWrapper from '../src/index';
 
 sinonStubPromise(sinon);
 chai.use(sinonChai);
 global.fetch = require('node-fetch');
 
 describe('Album', () => {
-    
+    let spotify;
     let promise;
     let stubedFetch;
 
     beforeEach(() => {
+        spotify = new SpotifyWrapper({
+            token: 'token'
+        });
         stubedFetch = sinon.stub(global, 'fetch');
         promise = stubedFetch.returnsPromise();
     });
@@ -25,15 +28,15 @@ describe('Album', () => {
     describe('Smoke tests', () => {
         
         it('should have method getAlbum', () => {        
-            expect(getAlbum).to.exist;
+            expect(spotify.album.getAlbum).to.exist;
         });
 
         it('should have method getAlbum', () => {        
-            expect(getAlbums).to.exist;
+            expect(spotify.album.getAlbums).to.exist;
         });
 
-        it('should have method getAlbumTracks', () => {        
-            expect(getAlbumTracks).to.exist;
+        it('should have method getTracks', () => {        
+            expect(spotify.album.getTracks).to.exist;
         });
 
     });
@@ -41,18 +44,18 @@ describe('Album', () => {
     describe('getAlbum', () => {
 
         it('should call fetch function', () => {
-            const album = getAlbum();
+            const album = spotify.album.getAlbum();
             expect(stubedFetch).to.been.calledOnce;
         });
 
         it('should call fetch the correct URL ', () => {
-           const album = getAlbum('1234'); 
+           const album = spotify.album.getAlbum('1234'); 
            expect(stubedFetch).to.have.been.calledWith('https://api.spotify.com/v1/albums/1234');
         });
 
         it('should return the correct data from Promise', () => {
             promise.resolves({album: 'name'});
-            const album = getAlbum('1234');
+            const album = spotify.album.getAlbum('1234');
             expect(album.resolveValue).to.be.eql({album: 'name'});
         });
 
@@ -61,38 +64,38 @@ describe('Album', () => {
     describe('getAlbums', () => {
 
         it('should call fetch function', () => {
-            const albums = getAlbums();
+            const albums = spotify.album.getAlbums();
             expect(stubedFetch).to.been.calledOnce;
         });
 
         it('should call fetch the correct URL', () => {
-            const albums = getAlbums(['1232131231','12321123123']);
+            const albums = spotify.album.getAlbums(['1232131231','12321123123']);
             expect(stubedFetch).to.have.been.calledWith('https://api.spotify.com/v1/albums?ids=1232131231,12321123123');
         });
 
         it('should return the correct data from Promise', () => {
             promise.resolves({albums: ['juca', 'alonso']});
-            const albums = getAlbums(['juca', 'alonso']);
+            const albums = spotify.album.getAlbums(['juca', 'alonso']);
             expect(albums.resolveValue).to.be.eql({albums: ['juca', 'alonso']});
         });
 
     });
 
-    describe('getAlbumTracks', () => {
+    describe('getTracks', () => {
         
         it('should call fetch function', () => {
-            const tracks = getAlbumTracks();
+            const tracks = spotify.album.getTracks();
             expect(stubedFetch).to.be.calledOnce;
         });
 
         it('should call fetch correct URL', () => {
-            const tracks = getAlbumTracks('track de teste');
+            const tracks = spotify.album.getTracks('track de teste');
             expect(stubedFetch).to.have.been.calledWith('https://api.spotify.com/v1/albums/track de teste/track');
         });
 
         it('should return the correct data fetch from Promise', () => {
             promise.resolves({track: 'só track boa'});
-            const tracks = getAlbumTracks('só track boa');
+            const tracks = spotify.album.getTracks('só track boa');
             expect(tracks.resolveValue).to.have.been.eql({track: 'só track boa'});
         });
 
