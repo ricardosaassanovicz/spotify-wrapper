@@ -13,14 +13,14 @@ export default class SpotifyWrapper {
     this.album = album.bind(this)();
     this.search = search.bind(this)();
   }
-
+  //teste
   request(url) {
     const headers = {
       headers: {
         Authorization: `Bearer ${this.token}`,
       },
     };
-//teste
+    
     return fetch(url, headers).then(toJSON);
   }
 }
